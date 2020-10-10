@@ -6,7 +6,15 @@ from flask import Flask, request, Response
 import uuid
 from pathlib import Path
 
-folder_path = str(Path().absolute()).replace('/src/', '') + '/src/'
+def check_os_platform():
+    import platform
+    return platform.system()
+
+folder_path = ''
+if check_os_platform() == 'Windows':
+    folder_path = str(Path().absolute()).replace('\\src\\', '') + '\\src\\'
+else:
+    folder_path = str(Path().absolute()).replace('/src/', '') + '/src/'
 
 def detect_face(img):
 
